@@ -8,9 +8,7 @@ const initialState = {
 const REQUEST_ARTICLES = 'REQUEST_ARTICLES'
 
 export const requestArticles = () => {
-    let data = axios.get('/api/hacker-news').then(res =>
-        res.data)
-
+    let data = axios.get('/api/reddit').then(res => res.data)
     return {
         type: REQUEST_ARTICLES,
         payload: data
@@ -23,10 +21,10 @@ export default function reducer(state = initialState, action) {
         case REQUEST_ARTICLES + '_FULFILLED':
             return {articles: payload, loading: false}
         case REQUEST_ARTICLES + '_PENDING':
-            return { ...state, loading: true}
+            return {...state, loading: true}
         case REQUEST_ARTICLES + '_REJECTED':
             return {...state, loading: false}
-        default: 
+        default:
             return state
     }
 }

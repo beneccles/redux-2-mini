@@ -1,14 +1,14 @@
 import axios from 'axios'
 
 const initialState = {
-    articles: [],
-    loading: false
+    loading: false,
+    articles: []
 }
 
 const REQUEST_ARTICLES = 'REQUEST_ARTICLES'
 
 export const requestArticles = () => {
-    let data = axios.get('/api/hacker-news').then(res =>
+    let data = axios.get('/api/medium').then(res =>
         res.data)
 
     return {
@@ -17,16 +17,16 @@ export const requestArticles = () => {
     }
 }
 
-export default function reducer(state = initialState, action) {
+export default function (state = initialState, action) {
     const { type, payload } = action
     switch (type) {
         case REQUEST_ARTICLES + '_FULFILLED':
             return {articles: payload, loading: false}
         case REQUEST_ARTICLES + '_PENDING':
-            return { ...state, loading: true}
+            return {...state, loading: true}
         case REQUEST_ARTICLES + '_REJECTED':
             return {...state, loading: false}
-        default: 
+        default:
             return state
     }
 }
